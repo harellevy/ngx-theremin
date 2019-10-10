@@ -30,9 +30,7 @@ export class ThereminComponent implements OnInit, AfterViewInit {
     gain.gain.value = 0;
     myOscillator.connect(gain);
     gain.connect(audioContext.destination);
-    console.log('loading mobilenet model...');
     this.model = await posenet.load();
-    console.log('Sucessfully loaded model');
     this.loading = false;
 
     setInterval(async () => {
