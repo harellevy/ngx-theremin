@@ -1,0 +1,9 @@
+<div class="container">
+  <video autoplay playsinline muted id="webcam" width="600" height="600" #video></video>
+
+  <div class="details">
+    <div>Gain: {{gain}}</div>
+    <div>Frequency: {{frequency}}</div>
+    <div>{{predictions | json}}</div>
+  </div>
+</div>
