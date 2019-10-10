@@ -1,9 +1,18 @@
 <div class="container">
-  <video autoplay playsinline muted id="webcam" width="600" height="600" #video></video>
+  <div class="video-container">
+    <video autoplay playsinline muted id="webcam" width="600" height="600" #video></video>
+    <div *ngFor="let part of cords | keyvalue">
+      <app-moving-dot
+        [x]="part.value.x"
+        [y]="part.value.y"
+        [title]="part.key"
+      ></app-moving-dot>
+    </div>
+  </div>
 
   <div class="details">
-    <div>Gain: {{gain}}</div>
-    <div>Frequency: {{frequency}}</div>
-    <div>{{predictions | json}}</div>
+    <div>Gain: {{gain | json}}</div>
+    <div>Frequency: {{frequency | json}}</div>
+    <div>cords: {{cords | json}}</div>
   </div>
 </div>

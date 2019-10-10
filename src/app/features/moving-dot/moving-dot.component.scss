@@ -1,0 +1,14 @@
+.dot {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: rgba(255, 50, 50, 0.5);
+  position: absolute;
+  display: block;
+  //margin-left: -3px;
+  //margin-top: -3px;
+  &:after {
+    content: attr(data-part);
+    color: blue;
+  }
+}
