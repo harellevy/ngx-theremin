@@ -11,9 +11,10 @@ const OCTAVE = Math.pow(2, 1 / 12);
 // number of octaves to split view size
 const NUM_OF_OCTAVES = 7;
 // maximum volume wanted 0-1
-const MAX_VOLUME = .3;
+const MAX_VOLUME = 1;
 const MAX_X_VALUE = 600;
 const MAX_Y_VALUE = 600;
+const FRAME_EVERY_X_MILLISECOND = 80;
 
 @Component({
   selector: 'app-theremin',
@@ -29,19 +30,19 @@ export class ThereminComponent implements OnInit, AfterViewInit {
   audioModelRightHand: TheraminBase;
   audioModelLeftHand: TheraminBase;
   constructor(
-    private thereminService: ThereminService
+    private thereminService: ThereminService,
   ) { }
 
   async ngOnInit() {
+    this.model = await posenet.load();
     this.audioModelRightHand = await this.thereminService.initOsc();
     this.audioModelLeftHand = await this.thereminService.initOsc();
-    this.model = await posenet.load();
     setInterval(async () => {
       const predictions = await this.model.estimateSinglePose(this.video.nativeElement, {flipHorizontal: true});
       this._prediction(predictions, 'rightWrist', this.audioModelRightHand);
       this._prediction(predictions, 'leftWrist', this.audioModelLeftHand);
       await tf.nextFrame();
-    }, 80);
+    }, FRAME_EVERY_X_MILLISECOND);
   }
 
   ngAfterViewInit() {
