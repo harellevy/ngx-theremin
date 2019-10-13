@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ThereminBodyPartEnum} from './features/theramin/theremin.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngx-theramin';
+  thereminBodyPartEnum = ThereminBodyPartEnum;
 }

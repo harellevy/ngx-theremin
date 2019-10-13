@@ -24,8 +24,8 @@ export class ThereminService {
       osc: myOscillator
       };
   }
-  startNote(model: TheraminBase, gain, frequency) {
-    model.osc.frequency.value = frequency;
+  startNote(model: TheraminBase, gain, detune) {
+    model.osc.detune.value = detune;
     model.gain.gain.value = gain;
   }
   stopNote(model: TheraminBase) {
