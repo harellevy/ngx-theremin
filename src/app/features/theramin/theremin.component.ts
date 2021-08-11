@@ -42,7 +42,7 @@ export enum ThereminBodyPartEnum {
   styleUrls: ['./theremin.component.scss']
 })
 export class ThereminComponent implements OnInit, AfterViewInit {
-  @Input() parts: ThereminBodyPartEnum[];
+  @Input() bodyParts: ThereminBodyPartEnum[];
   @ViewChild('video', {static: true}) video: ElementRef;
   cords: any = {};
   gain: any = {};
@@ -54,16 +54,16 @@ export class ThereminComponent implements OnInit, AfterViewInit {
   ) { }
 
   async ngOnInit() {
-    this.parts.forEach((key) => {
+    this.bodyParts.forEach((key) => {
       this.cords[key] = {};
     });
     this.model = await posenet.load();
-    for (const part of this.parts) {
+    for (const part of this.bodyParts) {
       this[part + 'AudioModel'] = await this.thereminService.initOsc();
     }
     setInterval(async () => {
       const predictions = await this.model.estimateSinglePose(this.video.nativeElement, {flipHorizontal: true});
-      for (const part of this.parts) {
+      for (const part of this.bodyParts) {
         this._prediction(predictions, part, this[part + 'AudioModel']);
       }
       await tf.nextFrame();
